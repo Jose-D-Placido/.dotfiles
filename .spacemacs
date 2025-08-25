@@ -565,10 +565,18 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
 
 (defun dotspacemacs/user-config ()
   "Configuration for user code:
-This function is called at the very end of Spacemacs startup, after layer
-configuration.
-Put your configuration code here, except for variables that should be set
-before packages are loaded."
+  This function is called at the very end of Spacemacs startup, after layer
+  configuration.
+  Put your configuration code here, except for variables that should be set
+  before packages are loaded."
+
+  ;; Enable shell commands to be run in org mode
+  (org-babel-do-load-languages 'org-babel-load-languages
+			       '((shell . t)))
+
+  ;; Dont ask to confirm every single execution by default
+  (setq org-confirm-babel-evaluate nil)
+
   )
 
 
