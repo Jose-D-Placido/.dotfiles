@@ -577,6 +577,15 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
   ;; Dont ask to confirm every single execution by default
   (setq org-confirm-babel-evaluate nil)
 
+
+  ;; Require markdown and htmlize to exports
+  (require 'ox-md)
+  (require 'htmlize)
+
+
+  ;; Set htmlize to use css section output instead of inline
+  (setq org-html-htmlize-output-type 'css)
+
   )
 
 
