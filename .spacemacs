@@ -586,6 +586,13 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
   ;; Set htmlize to use css section output instead of inline
   (setq org-html-htmlize-output-type 'css)
 
+
+  ;; Override babel to use 'string' src blocks which just evaluate to themselves and serve as temp files for other babel blocks or to tangle
+  (defun org-babel-execute:string (body params)
+    "Pseudo-Execute a block of str data with org-babel.  This function is
+    called by `org-babel-execute-src-block'."
+    (print body)
+    )
   )
 
 
