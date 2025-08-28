@@ -557,10 +557,18 @@ See the header of this file for more information."
 
 (defun dotspacemacs/user-init ()
   "Initialization for user code:
-This function is called immediately after `dotspacemacs/init', before layer
-configuration.
-It is mostly for variables that should be set before packages are loaded.
-If you are unsure, try setting them in `dotspacemacs/user-config' first."
+  This function is called immediately after `dotspacemacs/init', before layer
+  configuration.
+  It is mostly for variables that should be set before packages are loaded.
+  If you are unsure, try setting them in `dotspacemacs/user-config' first."
+
+  ;; Set a different font and size to make it more confortable
+  (setq-default dotspacemacs-default-font
+		'("SauceCodePro Nerd Font"
+		  :size 14.0
+		  :weight normal
+		  :width normal)
+		)
   )
 
 (defun dotspacemacs/user-config ()
