@@ -565,10 +565,16 @@ See the header of this file for more information."
   ;; Set a different font and size to make it more confortable
   (setq-default dotspacemacs-default-font
 		'("SauceCodePro Nerd Font"
-		  :size 14.0
+		  :size 13.0
 		  :weight normal
-		  :width normal)
+		  :width condensed)
 		)
+
+
+  ;; Set line numbers and make them relative like in vim
+  (setq-default dotspacemacs-line-numbers t)
+  (setq-default dotspacemacs-line-numbers 'relative)
+
   )
 
 (defun dotspacemacs/user-config ()
