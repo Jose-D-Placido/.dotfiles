@@ -585,8 +585,11 @@ See the header of this file for more information."
   before packages are loaded."
 
   ;; Enable shell commands to be run in org mode
-  (org-babel-do-load-languages 'org-babel-load-languages
-			       '((shell . t)))
+  ;; Enable dot commands to generate graphics
+  (org-babel-do-load-languages 'org-babel-load-languages '(
+							   (shell . t)
+							   (dot . t))
+			       )
 
   ;; Dont ask to confirm every single execution by default
   (setq org-confirm-babel-evaluate nil)
