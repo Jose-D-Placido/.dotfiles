@@ -1,0 +1,89 @@
+#+TITLE: System Configuration
+#+DESCRIPTION: This file contains some system configurations and checks to make
+#+DESCRIPTION: sure all tools are installed correctly. I started playing around
+#+DESCRIPTION: with the idea of having something like this on my main system.
+#+DESCRIPTION: Org-mode and literate programming seems to be great for this type
+#+DESCRIPTION: of task and fun to mess with.
+#+AUTHOR: Jose Placido
+#+EMAIL: jose.placido@vwds.pt
+
+#+PROPERTY: header-args:shell+ :eval no-export :exports both :results verbatim
+
+Check if the main apps are installed, this script will check some cli tools and
+mac apps installed in the system.
+
+#+BEGIN_SRC shell :noweb yes
+  <<bash_helper_functions>>
+
+  echo "Last checked: $(date)"
+
+  is_installed brew
+  is_installed git
+  is_installed vim
+  is_installed emacs
+  is_installed bash
+  is_app_installed iterm
+  is_app_installed homerow
+  is_app_installed hyperkey
+  is_app_installed keepassxc
+  is_app_installed slack
+  is_app_installed 'google chrome'
+  is_app_installed 'intellij idea'
+  is_app_installed tunnelblick
+  is_app_installed nagstamon
+  is_installed kubectl
+  is_installed docker
+  is_installed jq
+  is_installed yq          # same as jq but for yaml files
+  is_installed yamllint
+  is_installed helm
+  is_installed go
+  is_installed python3
+  is_app_installed docker
+  is_installed ksd         # a tool to decode k8s secrets
+  is_installed kubeseal    # a tool to seal k8s secrets
+  is_installed minikube
+
+  echo "Finished."
+#+END_SRC
+
+#+RESULTS:
+: Last checked: Sat Aug 29 18:20:24 WEST 2025
+: Finished.
+
+Check also if we have the correct envs set
+
+#+begin_src shell
+  echo "${SHELL}" | grep 'bash$' 2>&1 >/dev/null || echo "Wrong \$SHELL, expecting bash but got ${SHELL}"
+#+end_src
+
+
+#+RESULTS:
+: Wrong $SHELL, expecting bash but got /bin/zsh
+
+#+BEGIN_COMMENT
+  To lint the document in org-mode : M-x org-lint
+  When you change a property that affects the whole document you have to re-evaluate it: C-c C-c
+#+END_COMMENT
+
+#+name: bash_helper_functions
+#+begin_src shell :results silent :exports none
+  is_installed() {
+      PROGRAM="${1}"
+      which -a "${PROGRAM}" 2>&1 1>/dev/null
+      ERROR_CODE="$?"
+      if [ "$ERROR_CODE" -ne 0 ]; then
+          echo "Tool is missing: $PROGRAM"
+      fi
+  }
+
+  is_app_installed(){
+      PROGRAM="${1}"
+      mdfind "kMDItemKind == 'Application'" | grep -i "${PROGRAM}" \
+                                                   2>&1 1>/dev/null
+      ERROR_CODE="$?"
+      if [ "$ERROR_CODE" -ne 0 ]; then
+          echo "App is missing: $PROGRAM"
+      fi
+  }
+#+end_src
