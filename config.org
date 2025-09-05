@@ -47,24 +47,33 @@ mac apps are installed on the system.
   is_installed ksd         # a tool to decode k8s secrets
   is_installed kubeseal    # a tool to seal k8s secrets
   is_installed minikube
+  is_installed ssh
+  is_installed openssl     # used in some scripts
+  is_installed fzf
+  is_installed kubectx     # cluster configuration switcher
+  is_installed kubens      # cluster namespace switcher
+  is_installed rg          # ripgrep
 
   echo "Finished."
 #+end_src
 
 #+RESULTS:
-: Last checked: Mon Sep  1 09:13:23 WEST 2025
+: Last checked: Wed Sep  3 11:26:02 WEST 2025
 : Finished.
 
 Check also if we have the correct envs set
 
 #+begin_src shell
-    echo "${SHELL}" | grep 'bash$' 2>&1 >/dev/null || \
-        echo "Wrong \$SHELL, expecting bash but got ${SHELL}"
+  echo "Last checked: $(date)"
+  echo "${SHELL}" | grep 'zsh$' 2>&1 >/dev/null || \
+    echo "Wrong \$SHELL, expecting zsh but got ${SHELL}"
+  echo "Finished."
 #+end_src
 
-
 #+RESULTS:
-: Wrong $SHELL, expecting bash but got /bin/zsh
+: Last checked: Wed Sep  3 11:26:34 WEST 2025
+: Finished.
+
 
 * Utilities and notes
 
