@@ -564,11 +564,11 @@ See the header of this file for more information."
 
   ;; Set a different font and size to make it more confortable
   (setq-default dotspacemacs-default-font
-		'("SauceCodePro Nerd Font"
-		  :size 13.0
-		  :weight normal
-		  :width condensed)
-		)
+                '("SauceCodePro Nerd Font"
+                  :size 13.0
+                  :weight normal
+                  :width condensed)
+                )
 
 
   ;; Set line numbers and make them relative like in vim
@@ -587,9 +587,9 @@ See the header of this file for more information."
   ;; Enable shell commands to be run in org mode
   ;; Enable dot commands to generate graphics
   (org-babel-do-load-languages 'org-babel-load-languages '(
-							   (shell . t)
-							   (dot . t))
-			       )
+                                                           (shell . t)
+                                                           (dot . t))
+                               )
 
   ;; Dont ask to confirm every single execution by default
   (setq org-confirm-babel-evaluate nil)
@@ -600,18 +600,31 @@ See the header of this file for more information."
   (require 'htmlize)
 
 
-  ;; Set htmlize to use css section output instead of inline
-  (setq org-html-htmlize-output-type 'css)
-
-
   ;; Override babel to use 'string' src blocks which just evaluate to themselves and serve as temp files for other babel blocks or to tangle
   (defun org-babel-execute:string (body params)
     "Pseudo-Execute a block of str data with org-babel.  This function is
     called by `org-babel-execute-src-block'."
     (print body)
     )
-  )
 
+
+  ;; Set default headers for babel
+  (setf (alist-get :eval org-babel-default-header-args) "never-export")
+  (setf (alist-get :wrap org-babel-default-header-args) "example text")
+  (setf (alist-get :exports org-babel-default-header-args) "both")
+  (setf (alist-get :results org-babel-default-header-args) "verbatim replace")
+
+
+  ;; Use org.css from the :wq website for export document stylesheets
+  (setq org-html-head-extra
+        "<link rel=\"stylesheet\" href=\"https://dakrone.github.io/org.css\" type=\"text/css\" />"
+        org-html-head-include-default-style nil)
+
+
+  ;; Set htmlize to use css section output instead of inline
+  (setq org-html-htmlize-output-type 'css)
+
+  )
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
