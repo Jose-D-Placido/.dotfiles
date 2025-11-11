@@ -36,7 +36,6 @@ mac apps are installed on the system.
   is_app_installed tunnelblick
   is_app_installed nagstamon
   is_installed kubectl
-  is_installed docker
   is_installed jq
   is_installed yq          # same as jq but for yaml files
   is_installed yamllint
@@ -53,13 +52,18 @@ mac apps are installed on the system.
   is_installed kubectx     # cluster configuration switcher
   is_installed kubens      # cluster namespace switcher
   is_installed rg          # ripgrep
+  is_installed colima
+  is_installed_in_brew docker-credential-helper
+  is_installed_in_brew docker
 
   echo "Finished."
 #+end_src
 
 #+RESULTS:
-: Last checked: Wed Sep  3 11:26:02 WEST 2025
-: Finished.
+#+begin_example text
+Last checked: Tue Nov 11 16:52:55 WET 2025
+Finished.
+#+end_example
 
 Check also if we have the correct envs set
 
@@ -71,8 +75,10 @@ Check also if we have the correct envs set
 #+end_src
 
 #+RESULTS:
-: Last checked: Wed Sep  3 11:26:34 WEST 2025
-: Finished.
+#+begin_example text
+Last checked: Tue Nov 11 16:44:18 WET 2025
+Finished.
+#+end_example
 
 
 * Utilities and notes
@@ -93,22 +99,32 @@ Check also if we have the correct envs set
 
 #+name: bash_helper_functions
 #+begin_src shell :results silent :exports none
-  is_installed() {
-      PROGRAM="${1}"
-      which -a "${PROGRAM}" 2>&1 1>/dev/null
-      ERROR_CODE="$?"
-      if [ "$ERROR_CODE" -ne 0 ]; then
-          echo "Tool is missing: $PROGRAM"
-      fi
-  }
+    is_installed() {
+        PROGRAM="${1}"
+        which -a "${PROGRAM}" 2>&1 1>/dev/null
+        ERROR_CODE="$?"
+        if [ "$ERROR_CODE" -ne 0 ]; then
+            echo "Tool is missing: $PROGRAM"
+        fi
+    }
 
-  is_app_installed(){
-      PROGRAM="${1}"
-      mdfind "kMDItemKind == 'Application'" | grep -i "${PROGRAM}" \
-                                                   2>&1 1>/dev/null
-      ERROR_CODE="$?"
-      if [ "$ERROR_CODE" -ne 0 ]; then
-          echo "App is missing: $PROGRAM"
-      fi
-  }
+    is_app_installed(){
+        PROGRAM="${1}"
+        mdfind "kMDItemKind == 'Application'" | grep -i "${PROGRAM}" \
+          2>&1 1>/dev/null
+        ERROR_CODE="$?"
+        if [ "$ERROR_CODE" -ne 0 ]; then
+            echo "App is missing: $PROGRAM"
+        fi
+    }
+
+    is_installed_in_brew(){
+        PROGRAM="${1}"
+        brew ls --versions "${1}" \
+          2>&1 1>/dev/null
+        ERROR_CODE="$?"
+        if [ "$ERROR_CODE" -ne 0 ]; then
+            echo "Brew package is missing: $PROGRAM"
+        fi
+    }
 #+end_src

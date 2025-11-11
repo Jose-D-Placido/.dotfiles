@@ -148,3 +148,6 @@ compinit
 source <(fzf --zsh)
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Colima configuration
+export DOCKER_HOST=unix://$HOME/.colima/docker.sock
