@@ -42,7 +42,6 @@ mac apps are installed on the system.
   is_installed helm
   is_installed go
   is_installed python3
-  is_app_installed docker
   is_installed ksd         # a tool to decode k8s secrets
   is_installed kubeseal    # a tool to seal k8s secrets
   is_installed minikube
@@ -55,13 +54,14 @@ mac apps are installed on the system.
   is_installed colima
   is_installed_in_brew docker-credential-helper
   is_installed_in_brew docker
+  is_installed jnv         # interactive jq
 
   echo "Finished."
 #+end_src
 
 #+RESULTS:
 #+begin_example text
-Last checked: Tue Nov 11 16:52:55 WET 2025
+Last checked: Fri Nov 14 09:36:33 WET 2025
 Finished.
 #+end_example
 
