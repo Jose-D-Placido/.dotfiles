@@ -624,6 +624,9 @@ See the header of this file for more information."
   ;; Set htmlize to use css section output instead of inline
   (setq org-html-htmlize-output-type 'css)
 
+  ;; Enable org-indent-mode by default
+  (add-hook 'org-mode-hook 'org-indent-mode)
+
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
