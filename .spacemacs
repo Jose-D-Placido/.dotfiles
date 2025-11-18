@@ -67,7 +67,10 @@ This function should only modify configuration layer settings."
    ;; `dotspacemacs/user-config'. To use a local version of a package, use the
    ;; `:location' property: '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '(htmlize)
+   dotspacemacs-additional-packages '(
+                                      htmlize
+                                      org-roam
+                                      )
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -626,6 +629,24 @@ See the header of this file for more information."
 
   ;; Enable org-indent-mode by default
   (add-hook 'org-mode-hook 'org-indent-mode)
+
+  ;; Add org-roam as seen in https://systemcrafters.net/build-a-second-brain-in-emacs/getting-started-with-org-roam/
+  (use-package org-roam
+    :ensure t
+    :init
+    (setq org-roam-v2-ack t)
+    :custom
+    (org-roam-directory "~/Orgs")
+    (org-roam-completion-everywhere t)
+    :bind (("C-c n l" . org-roam-buffer-toggle)
+           ("C-c n f" . org-roam-node-find)
+           ("C-c n i" . org-roam-node-insert)
+           ("C-c n t" . org-roam-dailies-goto-today)
+           ("C-c n g" . org-roam-graph)
+           :map org-mode-map
+           ("C-M-i"    . completion-at-point))
+    :config
+    (org-roam-setup))
 
   )
 
