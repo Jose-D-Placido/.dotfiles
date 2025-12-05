@@ -55,13 +55,14 @@ mac apps are installed on the system.
   is_installed_in_brew docker-credential-helper
   is_installed_in_brew docker
   is_installed jnv         # interactive jq
+  is_installed pngpaste    # required by org-download
 
   echo "Finished."
 #+end_src
 
 #+RESULTS:
 #+begin_example text
-Last checked: Fri Nov 14 09:36:33 WET 2025
+Last checked: Fri Dec  5 15:24:04 WET 2025
 Finished.
 #+end_example
 
@@ -76,7 +77,7 @@ Check also if we have the correct envs set
 
 #+RESULTS:
 #+begin_example text
-Last checked: Tue Nov 11 16:44:18 WET 2025
+Last checked: Fri Dec  5 15:24:16 WET 2025
 Finished.
 #+end_example
 

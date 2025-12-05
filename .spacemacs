@@ -644,9 +644,16 @@ See the header of this file for more information."
            ("C-c n t" . org-roam-dailies-goto-today)
            ("C-c n g" . org-roam-graph)
            :map org-mode-map
-           ("C-M-i"    . completion-at-point))
+           ("C-M-i"   . completion-at-point)
+           ("C-c n p" . org-download-clipboard))
     :config
     (org-roam-setup))
+
+  ;; Add the ability to move images into org files
+  (require 'org-download)
+  (setq-default org-download-image-dir "~/Orgs/Attachments")
+  ;; Drag-and-drop to `dired`
+  (add-hook 'dired-mode-hook 'org-download-enable)
 
   )
 
