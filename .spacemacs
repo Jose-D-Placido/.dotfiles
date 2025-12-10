@@ -645,13 +645,24 @@ See the header of this file for more information."
            ("C-c n g" . org-roam-graph)
            :map org-mode-map
            ("C-M-i"   . completion-at-point)
-           ("C-c n p" . org-download-clipboard))
+           ("C-c n p" . org-download-screenshot))
     :config
     (org-roam-setup))
 
   ;; Add the ability to move images into org files
   (require 'org-download)
   (setq-default org-download-image-dir "~/Orgs/Attachments")
+  (setq org-download-screenshot-method "screencapture -i %s")
+
+  (defun org-download-clipboard-custom (&optional basename) ;; https://github.com/abo-abo/org-download/blob/master/org-download.el#L395
+    (interactive)
+    (let ((org-download-screenshot-method
+           "pasty %s" ))
+      (org-id-get-create)
+      (org-download-screenshot basename)))
+
+  (advice-add 'org-download-clipboard :override #'org-download-clipboard-custom)
+
   ;; Drag-and-drop to `dired`
   (add-hook 'dired-mode-hook 'org-download-enable)
 
