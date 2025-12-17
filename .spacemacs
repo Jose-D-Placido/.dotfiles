@@ -70,6 +70,7 @@ This function should only modify configuration layer settings."
    dotspacemacs-additional-packages '(
                                       htmlize
                                       org-roam
+                                      sqlite3
                                       )
 
    ;; A list of packages that cannot be updated.
